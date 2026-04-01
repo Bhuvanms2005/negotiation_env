@@ -2,9 +2,9 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY . .
+COPY . /app
 
-RUN pip install --no-cache-dir fastapi uvicorn pydantic google-generativeai
+RUN pip install --no-cache-dir fastapi uvicorn pydantic google-generativeai requests
 
 EXPOSE 7860
 
