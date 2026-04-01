@@ -2,16 +2,19 @@
 name = "negotiation-env"
 version = "0.1.0"
 description = "Negotiation AI Environment"
-authors = [
-  { name="Bhuvan" }
-]
+authors = [{ name = "Bhuvan" }]
+
 dependencies = [
   "fastapi",
   "uvicorn",
   "pydantic",
   "requests",
-  "google-generativeai"
+  "google-generativeai",
+  "openenv>=0.2.0"
 ]
+
+[project.scripts]
+server = "server.app:app"
 
 [build-system]
 requires = ["setuptools", "wheel"]
