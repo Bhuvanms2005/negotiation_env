@@ -1,19 +1,10 @@
-name: negotiation-env
-description: Real-world negotiation environment for evaluating AI agents in dynamic pricing and persuasion scenarios
+version: "1"
 
-entrypoint: app.main:app
+endpoints:
+  reset:
+    path: /reset
+    method: POST
 
-interfaces:
-  reset: /reset
-  step: /step
-  state: /state
-
-tags:
-  - reinforcement-learning
-  - negotiation
-  - llm
-  - openenv
-
-author: Bhuvan M S
-
-version: 1.0.0
+  step:
+    path: /step
+    method: POST
