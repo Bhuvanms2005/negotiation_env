@@ -8,3 +8,12 @@ endpoints:
   step:
     path: /step
     method: POST
+tasks:
+  - name: negotiation_easy
+    grader: tasks.task1
+
+  - name: negotiation_medium
+    grader: tasks.task2
+
+  - name: negotiation_hard
+    grader: tasks.task3
