@@ -8,6 +8,7 @@ endpoints:
   step:
     path: /step
     method: POST
+
 tasks:
   - name: task1
     grader: tasks.task1:grade

@@ -1,3 +1,7 @@
 def grade(result):
-    score = result.get("score", 0.3) if isinstance(result, dict) else 0.3
-    return max(0.01, min(float(score), 0.99))
+    """Grade task3 (hard): score strictly in (0, 1)"""
+    if isinstance(result, dict):
+        raw = float(result.get("score", 0.4))
+    else:
+        raw = 0.4
+    return max(0.01, min(raw, 0.99))

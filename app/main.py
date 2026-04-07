@@ -22,7 +22,7 @@ def extract_budget(text):
         return int(numbers[0])
     return None
 
-@app.get("/reset")
+@app.post("/reset")
 def reset():
     return env.reset()
 
@@ -36,7 +36,7 @@ def step(payload: dict):
     if env.done:
         return {
             "observation": obs,
-            "reward": 1.0,
+            "reward": 0.99,   # was 1.0 — must be strictly < 1
             "done": True,
             "action": {
                 "price_offer": obs.get("last_offer", obs.get("client_budget")),
@@ -72,7 +72,7 @@ def step(payload: dict):
         env.done = True
         return {
             "observation": obs,
-            "reward": 1.0,
+            "reward": 0.99,   # was 1.0 — must be strictly < 1
             "done": True,
             "action": {
                 "price_offer": obs.get("last_offer", obs["client_budget"]),

@@ -64,6 +64,7 @@ def llm_action(obs):
 # ================= ENV CALLS =================
 
 def env_reset():
+    # FIXED: must be POST to match openenv.yaml endpoint definition
     res = requests.post(f"{ENV_BASE_URL}/reset", timeout=30)
     res.raise_for_status()
     return res.json()
@@ -81,9 +82,13 @@ def env_step(obs, action):
 
     data = res.json()
 
+    # Clamp reward strictly between 0 and 1
+    raw_reward = float(data.get("reward", 0.01))
+    reward = max(0.01, min(raw_reward, 0.99))
+
     return (
         data.get("observation", obs),
-        float(data.get("reward", 0.0)),
+        reward,
         bool(data.get("done", False)),
         {}
     )
@@ -121,16 +126,16 @@ def run():
 
     except Exception as e:
         step_count += 1
-        rewards.append(0.0)
+        rewards.append(0.01)   # was 0.0 — must be strictly > 0
 
         print(
-            f"[STEP] step={step_count} action=error reward=0.00 done=true error={str(e)}",
+            f"[STEP] step={step_count} action=error reward=0.01 done=true error={str(e)}",
             flush=True
         )
         success = False
 
     finally:
-        rewards_str = ",".join(f"{r:.2f}" for r in rewards) if rewards else "0.00"
+        rewards_str = ",".join(f"{r:.2f}" for r in rewards) if rewards else "0.01"
 
         print(
             f"[END] success={str(success).lower()} steps={step_count} rewards={rewards_str}",

@@ -40,7 +40,8 @@ class NegotiationEnv:
 
         if abs(ai_offer - self.client_counter) <= 300:
             self.done = True
-            reward = min(1.0, reward + 0.3)
+            # Clamp strictly: adding 0.3 could push to 1.0
+            reward = min(reward + 0.3, 0.99)
 
         if self.round >= 6:
             self.done = True
