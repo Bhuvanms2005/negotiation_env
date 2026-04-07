@@ -9,11 +9,11 @@ endpoints:
     path: /step
     method: POST
 tasks:
-  - name: negotiation_easy
-    grader: tasks.task1
+  - name: task1
+    grader: tasks.task1:grade
 
-  - name: negotiation_medium
-    grader: tasks.task2
+  - name: task2
+    grader: tasks.task2:grade
 
-  - name: negotiation_hard
-    grader: tasks.task3
+  - name: task3
+    grader: tasks.task3:grade

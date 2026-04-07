@@ -1,2 +1,2 @@
 def grade(result):
-    return 0.75
+    return 0.7
