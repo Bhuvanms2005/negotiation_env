@@ -11,4 +11,5 @@ def grade(action, task, rounds):
     if rounds <= 5:
         score += 0.2
     
-    return min(score, 1.0)
+    # Clamp strictly between 0 and 1 (never exactly 0.0 or 1.0)
+    return max(0.01, min(score, 0.99))
